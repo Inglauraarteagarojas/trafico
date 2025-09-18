@@ -342,6 +342,112 @@
             font-weight: bold;
             color: #00d4ff;
         }
+
+        /* Nuevos estilos para extracción de datos */
+        .data-extraction-panel {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+        }
+
+        .user-profile-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            color: #00d4ff;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 10px rgba(0,212,255,0.3);
+        }
+
+        .analytics-dashboard {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .activity-log {
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .data-export-controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .privacy-notice {
+            background: rgba(255,165,0,0.2);
+            border: 1px solid rgba(255,165,0,0.5);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        .data-visualization {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .chart-container {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .consent-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .consent-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+        }
     </style>
 </head>
 <body>
@@ -351,6 +457,122 @@
         <div class="header">
             <h1>🚁 Laboratorio Cuántico: Control de Tráfico Urbano</h1>
             <p>Aplicación de algoritmos cuánticos para la optimización del monitoreo de drones en Bogotá</p>
+            <p><small>🔒 Versión con Sistema de Análisis de Datos de Usuario</small></p>
+        </div>
+
+        <!-- Nueva sección de extracción de datos de usuarios -->
+        <div class="data-extraction-panel">
+            <h3>📊 Panel de Datos del Usuario</h3>
+            <p>Ayúdanos a mejorar la experiencia del laboratorio compartiendo algunos datos:</p>
+            
+            <div class="privacy-notice">
+                🛡️ <strong>Aviso de Privacidad:</strong> Todos los datos son anónimos y se utilizan únicamente para mejorar la experiencia educativa. No se comparte información personal con terceros.
+            </div>
+
+            <div class="user-profile-form">
+                <div class="form-group">
+                    <label for="userName">Nombre (opcional):</label>
+                    <input type="text" id="userName" placeholder="Ingresa tu nombre" onchange="updateUserData()">
+                </div>
+                
+                <div class="form-group">
+                    <label for="userAge">Edad:</label>
+                    <select id="userAge" onchange="updateUserData()">
+                        <option value="">Selecciona</option>
+                        <option value="16-20">16-20 años</option>
+                        <option value="21-25">21-25 años</option>
+                        <option value="26-30">26-30 años</option>
+                        <option value="31-35">31-35 años</option>
+                        <option value="36+">36+ años</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="userEducation">Nivel Educativo:</label>
+                    <select id="userEducation" onchange="updateUserData()">
+                        <option value="">Selecciona</option>
+                        <option value="bachillerato">Bachillerato</option>
+                        <option value="tecnico">Técnico</option>
+                        <option value="universitario">Universitario</option>
+                        <option value="posgrado">Posgrado</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="userField">Campo de Estudio:</label>
+                    <select id="userField" onchange="updateUserData()">
+                        <option value="">Selecciona</option>
+                        <option value="fisica">Física</option>
+                        <option value="ingenieria">Ingeniería</option>
+                        <option value="matematicas">Matemáticas</option>
+                        <option value="computacion">Computación</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="userExperience">Experiencia Previa con Computación Cuántica:</label>
+                    <select id="userExperience" onchange="updateUserData()">
+                        <option value="">Selecciona</option>
+                        <option value="ninguna">Ninguna</option>
+                        <option value="basica">Básica</option>
+                        <option value="intermedia">Intermedia</option>
+                        <option value="avanzada">Avanzada</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="userLocation">Ubicación:</label>
+                    <input type="text" id="userLocation" placeholder="Ciudad, País" onchange="updateUserData()">
+                </div>
+            </div>
+
+            <div class="consent-checkbox">
+                <input type="checkbox" id="dataConsent" onchange="toggleDataCollection()">
+                <label for="dataConsent">Acepto que se recopilen datos anónimos de mi interacción con el laboratorio</label>
+            </div>
+
+            <div class="data-export-controls">
+                <button class="btn" onclick="exportUserData()">💾 Exportar Mis Datos</button>
+                <button class="btn" onclick="showAnalytics()">📈 Ver Analíticas</button>
+                <button class="btn" onclick="clearUserData()">🗑️ Limpiar Datos</button>
+            </div>
+        </div>
+
+        <!-- Panel de analíticas -->
+        <div class="analytics-dashboard" id="analyticsPanel" style="display: none;">
+            <h4>📊 Dashboard de Analíticas del Usuario</h4>
+            
+            <div class="data-visualization">
+                <div class="chart-container">
+                    <h5>⏱️ Tiempo de Sesión</h5>
+                    <div class="stat-number" id="sessionTime">0:00</div>
+                    <p>Tiempo en el laboratorio</p>
+                </div>
+                
+                <div class="chart-container">
+                    <h5>🖱️ Interacciones</h5>
+                    <div class="stat-number" id="clickCount">0</div>
+                    <p>Clics realizados</p>
+                </div>
+                
+                <div class="chart-container">
+                    <h5>🎯 Zonas Modificadas</h5>
+                    <div class="stat-number" id="zoneChanges">0</div>
+                    <p>Cambios en la grilla</p>
+                </div>
+                
+                <div class="chart-container">
+                    <h5>⚡ Simulaciones Ejecutadas</h5>
+                    <div class="stat-number" id="simulationCount">0</div>
+                    <p>Algoritmos ejecutados</p>
+                </div>
+            </div>
+            
+            <div class="activity-log" id="activityLog">
+                <strong>📋 Log de Actividades:</strong><br>
+                [Sistema iniciado] - Bienvenido al laboratorio cuántico<br>
+            </div>
         </div>
 
         <div class="lab-sections">
@@ -492,166 +714,123 @@ def optimize_drone_deployment(zones, traffic_data):
     </div>
 
     <script>
-        // Inicialización de partículas flotantes
-        function createParticles() {
-            const container = document.getElementById('particles');
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 6 + 's';
-                container.appendChild(particle);
-            }
-        }
+        // Variables globales para extracción de datos
+        let userData = {
+            sessionStart: new Date(),
+            clicks: 0,
+            zoneChanges: 0,
+            simulations: 0,
+            profile: {},
+            activities: [],
+            dataConsentGiven: false
+        };
 
-        // Inicialización de la grilla de drones
-        function initializeDroneGrid() {
-            const grid = document.getElementById('droneGrid');
-            const zones = ['Centro', 'Norte', 'Sur', 'Chapinero', 'Usaquén', 
-                          'Suba', 'Kennedy', 'Bosa', 'Fontibón', 'Engativá',
-                          'Barrios Unidos', 'Teusaquillo', 'Martires', 'Antonio Nariño', 'Puente Aranda',
-                          'Candelaria', 'Tunjuelito', 'Rafael Uribe', 'Ciudad Bolívar', 'Sumapaz'];
+        // Función para trackear interacciones
+        function trackInteraction(action, details = '') {
+            if (!userData.dataConsentGiven) return;
             
-            zones.forEach((zone, index) => {
-                const zoneDiv = document.createElement('div');
-                zoneDiv.className = 'zone free';
-                zoneDiv.textContent = zone.slice(0, 3).toUpperCase();
-                zoneDiv.title = zone;
-                zoneDiv.onclick = () => toggleZone(zoneDiv);
-                grid.appendChild(zoneDiv);
+            userData.clicks++;
+            const timestamp = new Date().toLocaleTimeString();
+            const activity = `[${timestamp}] ${action} ${details}`;
+            
+            userData.activities.push({
+                timestamp: new Date(),
+                action: action,
+                details: details
             });
+
+            updateAnalyticsDisplay();
+            logActivity(activity);
         }
 
-        function toggleZone(zoneElement) {
-            if (zoneElement.classList.contains('free')) {
-                zoneElement.classList.remove('free');
-                zoneElement.classList.add('occupied');
-            } else if (zoneElement.classList.contains('occupied')) {
-                zoneElement.classList.remove('occupied');
-                zoneElement.classList.add('selected');
+        // Función para actualizar datos del usuario
+        function updateUserData() {
+            const profile = {
+                name: document.getElementById('userName').value,
+                age: document.getElementById('userAge').value,
+                education: document.getElementById('userEducation').value,
+                field: document.getElementById('userField').value,
+                experience: document.getElementById('userExperience').value,
+                location: document.getElementById('userLocation').value
+            };
+            
+            userData.profile = profile;
+            trackInteraction('Perfil actualizado', JSON.stringify(profile));
+        }
+
+        // Función para alternar la recolección de datos
+        function toggleDataCollection() {
+            const consent = document.getElementById('dataConsent').checked;
+            userData.dataConsentGiven = consent;
+            
+            if (consent) {
+                trackInteraction('Consentimiento otorgado');
+                alert('✅ ¡Gracias! Ahora recopilaremos datos anónimos para mejorar tu experiencia.');
             } else {
-                zoneElement.classList.remove('selected');
-                zoneElement.classList.add('free');
+                alert('🔒 Recolección de datos deshabilitada. Tu privacidad está protegida.');
             }
         }
 
-        function initializeQuantumState() {
-            const results = document.getElementById('results');
-            results.innerHTML = `
-                <strong>🔮 Estado Cuántico Inicializado:</strong><br>
-                📊 Superposición creada para ${document.querySelectorAll('.zone').length} zonas<br>
-                ⚡ Estados: |000⟩ + |001⟩ + |010⟩ + ... + |111⟩<br>
-                🎯 Amplitud uniforme: 1/√8 por estado<br>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 100%;"></div>
-                </div>
-                ✅ Listo para optimización cuántica
-            `;
-        }
-
-        function runOptimization() {
-            const selectedZones = document.querySelectorAll('.zone.selected, .zone.occupied').length;
-            const totalZones = document.querySelectorAll('.zone').length;
+        // Función para mostrar analíticas
+        function showAnalytics() {
+            const panel = document.getElementById('analyticsPanel');
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
             
-            // Simular optimización
-            setTimeout(() => {
-                const results = document.getElementById('results');
-                results.innerHTML = `
-                    <strong>🚀 Optimización Cuántica Completada:</strong><br>
-                    📈 Zonas analizadas: ${totalZones}<br>
-                    🎯 Configuración óptima encontrada en 3.2 segundos<br>
-                    📊 Eficiencia de cobertura: 94.7%<br>
-                    ⚡ Reducción de congestión estimada: 23%<br>
-                    🔄 Iteraciones cuánticas: 128<br>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 95%;"></div>
-                    </div>
-                    ✨ Solución implementada exitosamente
-                `;
-                
-                // Marcar zonas óptimas
-                const zones = document.querySelectorAll('.zone');
-                zones.forEach((zone, index) => {
-                    if (Math.random() > 0.6) {
-                        zone.classList.remove('free', 'occupied');
-                        zone.classList.add('selected');
-                    }
-                });
-            }, 2000);
+            if (panel.style.display === 'block') {
+                trackInteraction('Panel de analíticas abierto');
+            }
+        }
+
+        // Función para actualizar la visualización de analíticas
+        function updateAnalyticsDisplay() {
+            const sessionDuration = new Date() - userData.sessionStart;
+            const minutes = Math.floor(sessionDuration / 60000);
+            const seconds = Math.floor((sessionDuration % 60000) / 1000);
             
-            // Mostrar progreso
-            const results = document.getElementById('results');
-            results.innerHTML = `
-                <strong>⚙️ Ejecutando Algoritmo Cuántico...</strong><br>
-                🔄 Procesando estados superpuestos<br>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 45%;"></div>
-                </div>
-                Por favor espere...
-            `;
+            document.getElementById('sessionTime').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('clickCount').textContent = userData.clicks;
+            document.getElementById('zoneChanges').textContent = userData.zoneChanges;
+            document.getElementById('simulationCount').textContent = userData.simulations;
         }
 
-        function compareClassical() {
-            const results = document.getElementById('results');
-            results.innerHTML = `
-                <strong>📊 Comparación Algorítmica:</strong><br>
-                <table style="width: 100%; margin: 10px 0;">
-                    <tr style="background: rgba(255,255,255,0.1);">
-                        <th style="padding: 8px;">Métrica</th>
-                        <th style="padding: 8px;">Clásico</th>
-                        <th style="padding: 8px;">Cuántico</th>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px;">Tiempo de ejecución</td>
-                        <td style="padding: 8px; color: #ff6b6b;">21.4s</td>
-                        <td style="padding: 8px; color: #51cf66;">3.2s</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px;">Configuraciones exploradas</td>
-                        <td style="padding: 8px; color: #ff6b6b;">1,024</td>
-                        <td style="padding: 8px; color: #51cf66;">12,288</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px;">Precisión de la solución</td>
-                        <td style="padding: 8px; color: #ff6b6b;">87.3%</td>
-                        <td style="padding: 8px; color: #51cf66;">99.7%</td>
-                    </tr>
-                </table>
-                🏆 Ventaja cuántica confirmada: 6.7x más rápido
-            `;
+        // Función para log de actividades
+        function logActivity(activity) {
+            const log = document.getElementById('activityLog');
+            log.innerHTML += activity + '<br>';
+            log.scrollTop = log.scrollHeight;
         }
 
-        function shareCode() {
-            alert('🚀 ¡Código compartido exitosamente!\n\nTu implementación ha sido añadida al repositorio colaborativo.\nOtros estudiantes podrán ver y mejorar tu solución.');
-        }
-
-        function joinForum() {
-            alert('👥 ¡Bienvenido al Foro Internacional!\n\nTe has unido a la red de estudiantes que investigan algoritmos cuánticos para ciudades inteligentes.\n\n• 847 estudiantes activos\n• 23 países participantes\n• 156 proyectos compartidos');
-        }
-
-        function downloadResults() {
-            const data = "Resultados del Laboratorio Cuántico - Bogotá\\n" +
-                        "==========================================\\n" +
-                        "Zonas analizadas: 20\\n" +
-                        "Tiempo de optimización: 3.2s\\n" +
-                        "Eficiencia alcanzada: 94.7%\\n" +
-                        "Reducción de congestión: 23%\\n";
+        // Función para exportar datos del usuario
+        function exportUserData() {
+            const dataToExport = {
+                ...userData,
+                exportDate: new Date().toISOString(),
+                sessionDuration: new Date() - userData.sessionStart
+            };
             
-            const blob = new Blob([data], { type: 'text/plain' });
+            const dataStr = JSON.stringify(dataToExport, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'resultados_laboratorio_cuantico.txt';
+            a.download = `datos_usuario_laboratorio_cuantico_${new Date().toISOString().split('T')[0]}.json`;
             a.click();
             URL.revokeObjectURL(url);
+            
+            trackInteraction('Datos exportados');
         }
 
-        // Inicializar la aplicación
-        document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
-            initializeDroneGrid();
-        });
-    </script>
-</body>
-</html>
+        // Función para limpiar datos del usuario
+        function clearUserData() {
+            if (confirm('¿Estás seguro de que quieres eliminar todos tus datos? Esta acción no se puede deshacer.')) {
+                userData = {
+                    sessionStart: new Date(),
+                    clicks: 0,
+                    zoneChanges: 0,
+                    simulations: 0,
+                    profile: {},
+                    activities: [],
+                    dataConsentGiven: false
+                };
+                
+                // Limpiar formularios
