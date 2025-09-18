@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -244,32 +245,19 @@ def optimize_drone_deployment(zones, traffic_data):
       const a = document.createElement('a'); a.href = url; a.download='resultados_laboratorio_cuantico.txt'; a.click(); URL.revokeObjectURL(url);
     }
 
-    // -------- Consentimiento + envío de telemetría (privacy-first) --------
+    // -------- Banner de consentimiento (opcional, recomendable) --------
     (function(){
       const BANNER_KEY = "lab-consent";
       const banner = document.getElementById('consent-banner');
+      if(!banner) return;
       const accept = banner.querySelector('.accept');
       const decline = banner.querySelector('.decline');
 
-      function sendTelemetry(){
-        // Datos mínimos, sin PII; la IP la verá el backend y se ANONIMIZA allí
-        const payload = {
-          page: location.pathname,
-          ref: document.referrer ? new URL(document.referrer).hostname : null,
-          ua_hint: navigator.userAgentData ? navigator.userAgentData.platform : navigator.platform,
-          tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
-          ts: new Date().toISOString()
-        };
-        navigator.sendBeacon
-          ? navigator.sendBeacon("http://127.0.0.1:8080/telemetry", new Blob([JSON.stringify(payload)], {type:"application/json"}))
-          : fetch("http://127.0.0.1:8080/telemetry", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload), keepalive:true});
-      }
-
       const saved = localStorage.getItem(BANNER_KEY);
-      if (saved === "accept"){ sendTelemetry(); }
+      if (saved === "accept"){ /* si quieres, dispara telemetría aquí también */ }
       else if (saved !== "decline"){ banner.style.display = 'block'; }
 
-      accept.onclick = ()=>{ localStorage.setItem(BANNER_KEY,"accept"); banner.remove(); sendTelemetry(); };
+      accept.onclick = ()=>{ localStorage.setItem(BANNER_KEY,"accept"); banner.remove(); };
       decline.onclick = ()=>{ localStorage.setItem(BANNER_KEY,"decline"); banner.remove(); };
     })();
 
@@ -278,5 +266,30 @@ def optimize_drone_deployment(zones, traffic_data):
       createParticles(); initializeDroneGrid();
     });
   </script>
+
+  <!-- ⬇️ Snippet de telemetría (ENVÍA AL BACKEND) - coloca tu dominio HTTPS -->
+  <script>
+  (function(){
+    // Si usas consentimiento, puedes chequearlo aquí:
+    // if (localStorage.getItem("lab-consent") !== "accept") return;
+
+    const payload = {
+      page: location.pathname,
+      ref: document.referrer ? new URL(document.referrer).hostname : null,
+      ua_hint: navigator.userAgent,
+      tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      ts: new Date().toISOString()
+    };
+
+    // IMPORTANTE: backend en HTTPS y con CORS permitido para tu dominio de GitHub Pages
+    fetch("https://TU-API-EJEMPLO/telemetry", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(payload),
+      keepalive: true
+    }).catch(()=>{});
+  })();
+  </script>
+  <!-- ⬆️ Fin snippet -->
 </body>
 </html>
